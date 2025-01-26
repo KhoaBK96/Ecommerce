@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import SearchAppBar from "./SearchAppBar";
-import MyDrawer, { DrawerItem } from "../common/MyDrawer";
 import HomeWorkIcon from "@mui/icons-material/HomeWork";
 import InventoryIcon from "@mui/icons-material/Inventory";
+import React, { useState } from "react";
 import { Tab } from "../../page/homepage/Homepage";
+import MyDrawer, { DrawerItem } from "../common/MyDrawer";
+import SearchAppBar from "./SearchAppBar";
 
 const drawerItems: DrawerItem[] = [
   {
@@ -20,15 +20,19 @@ const drawerItems: DrawerItem[] = [
 type NavbarProps = {
   tab: Tab;
   setTab: (tab: Tab) => void;
+  setSearch: (searchValue: string) => void;
 };
-const Navbar: React.FC<NavbarProps> = ({ tab, setTab }) => {
+const Navbar: React.FC<NavbarProps> = ({ tab, setTab, setSearch }) => {
   const [open, setOpen] = useState(false);
   // onClose
   //   onSelect,
   //   items,
   return (
     <>
-      <SearchAppBar toggleDrawer={() => setOpen((prevOpen) => !prevOpen)} />
+      <SearchAppBar
+        toggleDrawer={() => setOpen((prevOpen) => !prevOpen)}
+        setSearchValue={setSearch}
+      />
       <MyDrawer
         open={open}
         onClose={() => setOpen(false)}

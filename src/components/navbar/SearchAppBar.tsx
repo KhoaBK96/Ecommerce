@@ -1,15 +1,13 @@
-import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import { useDebounce } from "use-debounce";
-import useProduct from "../../page/homepage/Products/hooks/useProduct";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import InputBase from "@mui/material/InputBase";
+import { alpha, styled } from "@mui/material/styles";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import * as React from "react";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -54,11 +52,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 type SearchAppBarProps = {
   toggleDrawer: () => void;
+  setSearchValue: (searchValue: string) => void;
 };
-export const SearchAppBar: React.FC<SearchAppBarProps> = ({ toggleDrawer }) => {
-  const [search, setSearch] = React.useState("");
-  const [debouncedSearch] = useDebounce(search, 300)
-  const { model } = useProduct(debouncedSearch);
+export const SearchAppBar: React.FC<SearchAppBarProps> = ({
+  toggleDrawer,
+  setSearchValue,
+}) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -87,8 +86,7 @@ export const SearchAppBar: React.FC<SearchAppBarProps> = ({ toggleDrawer }) => {
             </SearchIconWrapper>
             <StyledInputBase
               type="text"
-              onChange={(e) => setSearch(e.target.value)}
-              value={search}
+              onChange={(e) => setSearchValue(e.target.value)}
             />
           </Search>
         </Toolbar>

@@ -1,19 +1,22 @@
-import React, { useState } from "react";
-import SearchAppBar from "../../components/navbar/SearchAppBar";
-import MyDrawer from "../../components/common/MyDrawer";
-import Navbar from "../../components/navbar/NavBar";
 import { Home } from "@mui/icons-material";
-import Products from "./Products/Products";
+import { useState } from "react";
+import Navbar from "../../components/navbar/NavBar";
+import Products from "../Products/Products";
 
 export type Tab = "Home" | "Products";
 
 const Homepage = () => {
   const [tab, setTab] = useState<Tab>("Home");
+  const [search, setSearch] = useState("");
 
   return (
     <>
-      <Navbar tab={tab} setTab={setTab} />
-      {tab == "Home" ? <Home /> : <Products />}
+      <Navbar tab={tab} setTab={setTab} setSearch={setSearch} />
+      {tab == "Home" && search === "" ? (
+        <Home />
+      ) : (
+        <Products searchValue={search} />
+      )}
     </>
   );
 };

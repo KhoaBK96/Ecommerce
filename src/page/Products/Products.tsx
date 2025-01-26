@@ -3,17 +3,18 @@ import { Product } from "./model";
 import useProduct from "./hooks/useProduct";
 import { useDebounce } from "use-debounce";
 
-const Products = () => {
-  const [search, setSearch] = useState("");
-  const [debouncedSearch] = useDebounce(search, 300)
+type ProductsProps = {
+  searchValue : string
+};
+const Products: React.FC<ProductsProps> = ({
+  searchValue
+}) => {
+
+  const [debouncedSearch] = useDebounce(searchValue, 1000);
   const { model } = useProduct(debouncedSearch);
+
   return (
     <>
-      <input
-        type="text"
-        onChange={(e) => setSearch(e.target.value)}
-        value={search}
-      />
       <div>
         {model.map((m) => {
           return (
@@ -25,7 +26,7 @@ const Products = () => {
             </div>
           );
         })}
-      </div >
+      </div>
     </>
   );
 };
