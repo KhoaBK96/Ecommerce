@@ -20,7 +20,7 @@ const Products: React.FC<ProductsProps> = ({
           return (
             <div>
               <h1>
-                {m.id} {m.name}
+                {m.id} {m.name }
               </h1>
               <h2>{m.price}</h2>
             </div>
